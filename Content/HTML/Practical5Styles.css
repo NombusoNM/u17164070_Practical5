@@ -1,0 +1,42 @@
+﻿body{
+    background-color: floralwhite;
+}
+
+
+
+p {
+    display: inline;
+}
+
+.btn.custom-btn {
+    background-color: floralwhite !important;
+    color: deeppink !important;
+    border: 1px solid black !important;
+    
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+    border-radius: 4px !important;
+    margin-top: 20px !important;
+}
+
+    .btn.custom-btn:hover {
+        background-color: deeppink !important;
+        color: black !important;
+    }
+
+custom-link {
+    color: black; /* Change this to the color you want */
+    text-decoration: none; /* Removes the underline */
+}
+
+custom-link:hover {
+        color: black; /* Change the hover color */
+}
+
+.form-horizontal{
+    margin-left:80px !important;
+}
+
+.form-group-button {
+    margin-left: 100px !important;
+}
+

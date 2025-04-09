@@ -1,0 +1,216 @@
+﻿/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: lightpink;
+}
+
+/* Header */
+header {
+    text-align: center;
+    background-color: white;
+    color: deeppink;
+    padding: 20px;
+}
+
+/* Navigation Menu */
+.navbar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: lightpink;
+    display: flex;
+    flex-wrap: wrap; /* Allows items to move to the next line if needed */
+    justify-content: center;
+}
+
+    .navbar li {
+        display: inline-block;
+        padding: 10px 20px;
+        border-right: 1px solid white; /* Right border for all except last */
+    }
+
+        .navbar li:last-child {
+            border-right: none; /* No right border for the last item */
+        }
+
+        .navbar li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+            transition: background 0.3s ease;
+        }
+
+            /* Active Link */
+            .navbar li a.active {
+                background-color: darkred; /* Different color for active link */
+            }
+
+            /* Hover Effect (Except Active Link) */
+            .navbar li a:not(.active):hover {
+                background-color: grey;
+            }
+/* Navigation Bar */
+.links {
+    display: flex; /* Arrange links in a row */
+    background-color: black;
+    padding: 10px;
+    flex-wrap: wrap; /* Move to next line if needed */
+}
+
+    /* Navigation Links */
+    .links a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        background-color: black;
+        border-right: 2px solid white; /* Right border for separation */
+    }
+
+        /* Remove border for the last item */
+        .links a:last-child {
+            border-right: none;
+        }
+
+    /* Active Link */
+    .links .active a {
+        background-color: green;
+    }
+
+    /* Hover Effect */
+    .links a:hover {
+        background-color: grey;
+    }
+
+
+/* Sections */
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Flexbox Layout */
+.content-flex {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Images */
+.bio-img, .hobby-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Reverse Image Position */
+.hobbies .content-flex {
+    flex-direction: row-reverse;
+}
+
+/* Table */
+.table_module {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.table_module, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+.bio {
+    margin: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.content-flex {
+    display: flex;
+    align-items: center;
+}
+
+.bio-img {
+    width: 150px; /* Adjust as needed */
+    height: auto;
+    margin-left: 20px; /* Ensures spacing from text */
+}
+
+/* Ensure text stays left while image moves right */
+.hobbies .content-flex {
+    display: flex;
+    flex-direction: row-reverse; /* Image moves right */
+}
+
+.hobbies p {
+    flex: 1; /* Allows text to take up space */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stacks menu vertically on small screens */
+        text-align: center;
+    }
+
+    .content-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .bio-img, .hobby-img {
+        width: 10px;
+        height: 100px;
+    }
+
+    .bio-img {
+        display: flex;
+        justify-content: flex-end; /* Moves the image to the right */
+        align-items: center;
+    }
+
+        .bio-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    /* Flexbox Layout for Sections */
+    .content-flex {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* Default Left Image */
+    .bio-img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Move Image to the Right (Keep Text on Left) */
+    .hobbies .content-flex {
+        justify-content: space-between; /* Ensures text stays on the left */
+    }
+
+    .hobbies .bio-img {
+        margin-left: auto; /* Pushes the image to the right */
+    }
+
+
+}

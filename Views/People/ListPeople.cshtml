@@ -1,0 +1,168 @@
+﻿@* Interface Enumarable = Enumarate or list (to ascertain the number of : count) *@
+
+@model IEnumerable<nombusoStudyGroup.Models.PersonModel>
+
+@{
+    ViewBag.Title = "List of People";
+}
+
+<head>
+    <link href="@Url.Content("~/Content/Practical5Styles.css")" rel="stylesheet" />
+
+
+</head>
+
+<h2>List of People</h2>
+<hr />
+<h4>
+    @Html.ActionLink("Create New", "Create", new { @class = "custom-link" })
+
+</h4>
+<hr />
+<h4>
+    Search string: <input type="text" id="search" size="20" name="search">
+</h4>
+
+<h5>
+    <button class="btn custom-btn" onclick="ST()">Submit</button>
+</h5>
+
+
+<hr />
+<table class="table table-bordered">
+
+    <tr style="background-color: lightpink; color: floralwhite; ">
+        <th width="16%">
+            @Html.DisplayNameFor(model => model.StudentNumber)
+        </th>
+        <th width="16%">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th width="16%">
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th class="text-center" width="16%">
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+
+        <th class="text-center" width="16%">
+            Delete
+        </th>
+    </tr>
+
+    <tbody id="info">
+        @foreach (var item in Model) //For each person
+        {
+            <tr class="rowcontent">
+                <td width="16%">
+                    @Html.DisplayFor(modelItem => item.StudentNumber)
+                </td>
+                <td width="16%">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td width="16%">
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td class="text-center" width="16%">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @*<td class="text-center" width="20%">
+                        @Html.DisplayFor(modelItem => item.myLink)
+                    </td>*@
+
+                <td class="text-center" width="16%">
+                    <button type="button" class="btn custom-btn" onclick="delete_row(this)">Delete</button>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<hr />
+
+<div>
+    <button class="btn custom-btn" onclick="Save()">Save to local storage</button>
+    <button class="btn custom-btn" onclick="Retrieve()">Retrieve from local storage</button>
+    <button class="btn custom-btn" onclick="Clear()">Clear local storage</button>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+
+        var tableBody = document.getElementById("info");
+
+        //Save table data to local storage
+        function Save() {
+            var tableData = "";
+
+            for (var i = 0, row; row = tableBody.rows[i]; i++) {
+                for (var j = 0, col; col = row.cells[j]; j++) {
+                    // Skip the last column (Delete button)
+                    if (j === row.cells.length - 1) continue;
+                    tableData += col.innerText + "|";
+                }
+                tableData += ",";
+            }
+
+            // Actually store the data
+            localStorage.setItem("tableData", tableData);
+        //    alert("Saved to local storage!");
+        }
+
+        // Clear local storage
+        function Clear() {
+            localStorage.removeItem("tableData");
+            //alert("Local storage cleared!");
+            location.reload(); // Optional: refresh the page
+        }
+
+        // Retrieve table data from local storage
+        function Retrieve() {
+            var tableData = localStorage.getItem("tableData");
+
+            if (!tableData) {
+                //alert("No data found in local storage.");
+                return;
+            }
+
+     
+
+            var rows = tableData.split(",");
+            for (var i = 0; i < rows.length - 1; i++) {
+                var cells = rows[i].split("|");
+                var row = document.createElement("tr");
+
+                for (var j = 0; j < cells.length - 1; j++) {
+                    var cell = document.createElement("td");
+                    cell.innerText = cells[j];
+                    row.appendChild(cell);
+                }
+
+            
+
+                tableBody.appendChild(row);
+            }
+        }
+
+        // Search
+        function ST() {
+            var s = document.getElementById("search").value;
+            const pattern = new RegExp(s, "i");
+
+            for (let i = 0; i < tableBody.rows.length; i++) {
+                if (pattern.test(tableBody.rows[i].cells[1].innerText)) {
+                    tableBody.rows[i].style.color = "red";
+                    setTimeout(function () {
+                        tableBody.rows[i].style.color = "black";
+                    }, 3000);
+                }
+            }
+        }
+
+        // Delete row function
+        function delete_row(e) {
+            e.parentElement.parentElement.remove();
+        }
+
+    </script>
+}

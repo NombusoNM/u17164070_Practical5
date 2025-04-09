@@ -1,0 +1,108 @@
+﻿body {
+    background-color: lightpink;
+}
+
+.main-content {
+    background-color: #2DAA9E;
+    padding: 40px 20px;
+}
+
+/* Navigation links at the top */
+.links {
+    display: flex;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+}
+
+    .links div {
+        border-right: solid grey 1px;
+        flex: 0.2;
+        padding: 20px;
+        font-size: larger;
+    }
+
+body > div {
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.links a {
+    color: white;
+    text-decoration: none;
+}
+
+.active {
+    background-color: cornflowerblue;
+}
+
+/* 
+   Each .bio is a separate box with a blue border 
+   and spacing from the previous section 
+*/
+.main-content .bio {
+    border: solid blue 1px;
+    background-color: white;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* 
+   This container holds an image and paragraph side-by-side 
+   (no float). They appear horizontally next to each other. 
+*/
+.content-flex {
+    display: flex;
+    gap: 20px; /* Space between image and paragraph */
+    align-items: flex-start; /* Top-align them */
+}
+
+/* 
+   The image used in Biography (on the left) 
+   Now 3x bigger (max-width: 240px)
+*/
+.bio-img {
+    max-width: 240px;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+    .bio-img:hover {
+        transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+    }
+
+/* 
+   The image used in Hobbies (on the right) 
+   Also 3x bigger 
+*/
+.hobby-img {
+    max-width: 240px;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+    .hobby-img:hover {
+        transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+    }
+
+/* Table styling for Modules */
+.module_table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+}
+
+th {
+    background-color: #eaeaea;
+}
