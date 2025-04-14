@@ -24,7 +24,7 @@
 </h4>
 
 <h5>
-    <button class="btn custom-btn" onclick="ST()">Submit</button>
+    <button class="btn custom-btn" onclick="Search()">Submit</button>
 </h5>
 
 
@@ -91,16 +91,25 @@
 
         var tableBody = document.getElementById("info");
 
+
+        // Delete row function
+        function delete_row(element) {
+            element.parentElement.parentElement.remove();
+        }
+
+
         //Save table data to local storage
         function Save() {
             var tableData = "";
 
+            //parses through each row and column and leaves out last row
             for (var i = 0, row; row = tableBody.rows[i]; i++) {
                 for (var j = 0, col; col = row.cells[j]; j++) {
-                    // Skip the last column (Delete button)
+                    // Skips the delete button column
                     if (j === row.cells.length - 1) continue;
                     tableData += col.innerText + "|";
                 }
+                //separates data from each column by , in local storage
                 tableData += ",";
             }
 
@@ -109,59 +118,63 @@
         //    alert("Saved to local storage!");
         }
 
-        // Clear local storage
-        function Clear() {
-            localStorage.removeItem("tableData");
-            //alert("Local storage cleared!");
-            location.reload(); // Optional: refresh the page
-        }
-
         // Retrieve table data from local storage
         function Retrieve() {
             var tableData = localStorage.getItem("tableData");
+            if (!tableData) return;
 
-            if (!tableData) {
-                //alert("No data found in local storage.");
-                return;
-            }
-
-     
+            
 
             var rows = tableData.split(",");
-            for (var i = 0; i < rows.length - 1; i++) {
+            for (var i = 0; i < rows.length -1; i++) {
+                if (!rows[i].trim()) continue; // skip any empty rows
                 var cells = rows[i].split("|");
                 var row = document.createElement("tr");
+                row.className = "rowcontent";
 
-                for (var j = 0; j < cells.length - 1; j++) {
+                for (var j = 0; j < cells.length -1; j++) {
                     var cell = document.createElement("td");
                     cell.innerText = cells[j];
                     row.appendChild(cell);
                 }
 
-            
+                // Add delete button cell
+                var deleteCell = document.createElement("td");
+                deleteCell.className = "text-center";
+                deleteCell.innerHTML = `<button type="button" class="btn custom-btn" onclick="delete_row(this)">Delete</button>`;
+                row.appendChild(deleteCell);
 
                 tableBody.appendChild(row);
             }
         }
 
+        // Clear local storage
+        function Clear() {
+            localStorage.removeItem("tableData");
+
+            // Clear all rows in the table body
+            while (tableBody.firstChild) {
+                tableBody.removeChild(tableBody.firstChild);
+            }
+
+            // Optional: refresh page if needed
+            // location.reload();
+        }
+
+
         // Search
-        function ST() {
-            var s = document.getElementById("search").value;
-            const pattern = new RegExp(s, "i");
+        function Search() {
+            var searching = document.getElementById("search").value;
+            const searched = new RegExp(searching, "i");
 
             for (let i = 0; i < tableBody.rows.length; i++) {
-                if (pattern.test(tableBody.rows[i].cells[1].innerText)) {
+                if (searched.test(tableBody.rows[i].cells[1].innerText)) {
                     tableBody.rows[i].style.color = "red";
                     setTimeout(function () {
                         tableBody.rows[i].style.color = "black";
                     }, 3000);
                 }
             }
-        }
-
-        // Delete row function
-        function delete_row(e) {
-            e.parentElement.parentElement.remove();
         }
 
     </script>

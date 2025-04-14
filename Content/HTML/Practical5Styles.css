@@ -40,3 +40,10 @@ custom-link:hover {
     margin-left: 100px !important;
 }
 
+
+
+.panel-body{
+    background-color: pink;
+    color: darkslategrey;
+
+}
